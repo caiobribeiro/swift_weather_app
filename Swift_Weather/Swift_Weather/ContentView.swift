@@ -19,11 +19,11 @@ struct ContentView: View {
                 MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill", temperature: 24)
 
                 HStack(spacing: 20) {
-                    WeathcerDayView(dayOffWeek: "Ter", imageName: "cloud.sun.fill", temperature: 24)
-                    WeathcerDayView(dayOffWeek: "Qua", imageName: "sun.max.fill", temperature: 24)
-                    WeathcerDayView(dayOffWeek: "Qui", imageName: "wind.snow", temperature: -2)
-                    WeathcerDayView(dayOffWeek: "Sex", imageName: "sunset.fill", temperature: 24)
-                    WeathcerDayView(dayOffWeek: "Sáb", imageName: "cloud.rain.fill", temperature: 24)
+                    WeatherDayView(dayOffWeek: "Ter", imageName: "cloud.sun.fill", temperature: 24)
+                    WeatherDayView(dayOffWeek: "Qua", imageName: "sun.max.fill", temperature: 24)
+                    WeatherDayView(dayOffWeek: "Qui", imageName: "wind.snow", temperature: -2)
+                    WeatherDayView(dayOffWeek: "Sex", imageName: "sunset.fill", temperature: 24)
+                    WeatherDayView(dayOffWeek: "Sáb", imageName: "cloud.rain.fill", temperature: 24)
                 }
 
                 Spacer()
@@ -46,7 +46,7 @@ struct ContentView: View {
     ContentView()
 }
 
-struct WeathcerDayView: View {
+struct WeatherDayView: View {
     var dayOffWeek: String
     var imageName: String
     var temperature: Int
@@ -57,9 +57,10 @@ struct WeathcerDayView: View {
                 .font(.system(size: 16, weight: .semibold, design: .default))
                 .foregroundColor(.white)
             Image(systemName: imageName)
-                .renderingMode(.original)
+                .symbolRenderingMode(.multicolor)
                 .resizable()
                 .scaledToFit()
+//                .foregroundColor(.white)
                 .frame(width: 40, height: 40)
             Text("\(temperature)°")
                 .font(.system(size: 28, weight: .semibold))
@@ -72,13 +73,16 @@ struct BackgroundView: View {
     @Binding var isNight: Bool
 
     var body: some View {
-        LinearGradient(
-            gradient: Gradient(
-                colors: [Color(isNight ? .black : .blue), Color(isNight ? .gray : Color("lightBlue"))]
-            ),
-            startPoint: .topLeading,
-            endPoint: .bottomLeading
-        ).edgesIgnoringSafeArea(.all)
+//        LinearGradient(
+//            gradient: Gradient(
+//                colors: [Color(isNight ? .black : .blue), Color(isNight ? .gray : Color("lightBlue"))]
+//            ),
+//            startPoint: .topLeading,
+//            endPoint: .bottomLeading
+//        ).edgesIgnoringSafeArea(.all)
+        ContainerRelativeShape()
+            .fill(isNight ? Color.black.gradient : Color.blue.gradient)
+            .ignoresSafeArea()
     }
 }
 
